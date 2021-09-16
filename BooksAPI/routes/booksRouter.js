@@ -2,19 +2,19 @@ const BooksRouter = require("express").Router();
 const BooksModel = require("../Models/booksModel");
 
 BooksRouter.route("/")
-  .get((req, res) => {
+  .get((req, res) => {      // Get All books
     BooksModel.find({}, (err, books) => {
       if (err) res.sendStatus(404).json({ msg: "Books not found !!" });
       else res.status(200).json(books);
     });
   })
-  .post((req, res) => {
+  .post((req, res) => {     // Add new book
     let book = new BooksModel(req.body);
     book.save();
     res.status(201).json(book);
   });
 BooksRouter.route("/:BookId")
-  .put((req, res) => {
+  .put((req, res) => {      // Edit specific book
     BooksModel.findById(req.params.BookId, (err, book) => {
       if (err) {
         res.sendStatus(404).json({ msg: "Book not found !!" });
@@ -29,7 +29,7 @@ BooksRouter.route("/:BookId")
       }
     });
   })
-  .delete((req, res) => {
+  .delete((req, res) => {    // Delete specific book
     BooksModel.findById(req.params.BookId, (req, book) => {
       book.remove((err) => {
         if (err) {
