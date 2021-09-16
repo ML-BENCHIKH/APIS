@@ -15,5 +15,5 @@ app.use(express.json());
 app.listen(process.env.PORT || 3000, () => {
   console.log("Backend server is running !");
 });
-// Routes uses
+// Routes uses with /api/books/ endpoint
 app.use("/api/books/", booksRouter);
